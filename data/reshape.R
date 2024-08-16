@@ -22,7 +22,18 @@ filename <- file.path(path,filename)
 raw_dat <- read_csv(filename)
 raw_dat
 
-
+#gather changes the wide data into tidy data
 dat <- raw_dat %>% gather(key,value, -country)
+
+
+#separate is used when we need to separate a variable into 2
 dat %>% separate(key,c("year","variable_name"),"_")
+
 new <- dat %>% separate(key, c("year", "variable_name"))
+
+#if any part of the new variable name has 2 parts we have to write
+var_name <- c("year","first_variable_name","second_variable_name")
+dat %>% separate(key, var_name, fill = "right")
+
+
+dat %>% separate(key, c("year","variable_name"), extra = "merge")
